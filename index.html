@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Card | Todos Santos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Digital Card | Hacienda Santa Ana</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -22,17 +23,17 @@
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            padding: 40px 16px;
+            padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom) 16px;
             overflow-y: auto;
             overflow-x: hidden;
-            position: relative;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* Fondo real de la página */
+        /* Fondo dinámico de la página */
         #page-bg {
             position: fixed;
             inset: 0;
-            background-image: url('https://i.postimg.cc/52s1SDJx/Chat-GPT-Image-19-mar-2026-05-48-15-p-m.png');
+            background-image: url('https://i.postimg.cc/W13P9SXn/Chat-GPT-Image-19-mar-2026-07-33-25-p-m.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -54,163 +55,172 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                        transform 1.8s cubic-bezier(0.4, 0, 0.2, 1), 
-                        visibility 1.5s;
             background: #000;
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), 
+                        transform 1.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                        visibility 1s;
         }
 
         #splash-bg {
             position: absolute;
             inset: 0;
-            background-image: url('https://i.postimg.cc/kg268NrL/Chat-GPT-Image-19-mar-2026-05-48-15-p-m.png');
+            background-image: url('https://i.postimg.cc/W13P9SXn/Chat-GPT-Image-19-mar-2026-07-33-25-p-m.png');
             background-size: cover;
             background-position: center;
-            filter: blur(8px) brightness(0.6);
-            transform: scale(1);
+            filter: blur(8px) brightness(0.5);
+            transform: scale(1.1);
             z-index: -1;
             opacity: 0;
-            transition: opacity 1.2s ease, transform 2.5s cubic-bezier(0.1, 0, 0.3, 1);
+            transition: opacity 1s ease, transform 2s cubic-bezier(0.1, 0, 0.3, 1);
         }
 
         #splash-bg.loaded {
             opacity: 1;
+            transform: scale(1);
         }
 
         #splash-screen.zoom-out {
             opacity: 0;
             visibility: hidden;
-            transform: scale(1.35);
+            transform: scale(1.1);
         }
 
         .welcome-content {
             text-align: center;
             opacity: 0;
-            transform: scale(0.9);
+            transform: translateY(20px);
             width: 90%;
-            max-width: 600px;
+            max-width: 400px;
         }
 
         .welcome-content.reveal {
-            animation: welcomeReveal 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation: welcomeReveal 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
         .welcome-text {
-            color: rgba(255, 255, 255, 0.8);
-            /* Tamaño de fuente aumentado para proporcionalidad */
-            font-size: 1.1rem;
-            /* Espaciado de letras para elegancia */
-            letter-spacing: 1.2em;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            letter-spacing: 0.8em;
             font-weight: 700;
             text-transform: uppercase;
             display: block;
-            margin-bottom: 2rem;
-            margin-right: -1.2em; /* Compensa el padding del último carácter */
+            margin-bottom: 1.5rem;
+            margin-right: -0.8em;
         }
 
         .welcome-logo {
-            /* Logo de bienvenida */
-            max-width: 480px;
-            width: 100%;
+            width: 80%;
+            max-width: 300px;
             height: auto;
             margin: 0 auto;
             filter: brightness(0) invert(1);
         }
 
         @keyframes welcomeReveal {
-            to { opacity: 1; transform: scale(1); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- CONTENIDO PRINCIPAL --- */
+        /* --- CONTENIDO PRINCIPAL ADAPTATIVO --- */
         #main-wrapper {
             width: 100%;
+            max-width: 420px;
             display: flex;
             justify-content: center;
             opacity: 0;
-            transform: scale(0.95) translateY(15px);
-            transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), 
-                        transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-            pointer-events: none;
-            margin-bottom: 40px;
+            transform: translateY(30px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+            padding-top: 20px;
+            padding-bottom: 40px;
         }
 
         #main-wrapper.reveal {
             opacity: 1;
-            transform: scale(1) translateY(0);
-            pointer-events: auto;
+            transform: translateY(0);
         }
 
         .modern-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border: 1px solid var(--glass-border);
-            border-radius: 44px;
-            box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.5);
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             width: 100%;
-            max-width: 380px;
             overflow: hidden;
         }
 
         .logo-container img {
-            filter: brightness(0) invert(1) drop-shadow(0 4px 10px rgba(0,0,0,0.15));
+            filter: brightness(0) invert(1) drop-shadow(0 4px 8px rgba(0,0,0,0.2));
         }
 
         .bento-item {
-            background: rgba(255, 255, 255, 0.07);
+            background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 26px;
-            transition: all 0.3s ease;
+            border-radius: 24px;
+            transition: transform 0.2s ease, background 0.2s ease;
+            cursor: pointer;
         }
 
-        .bento-item:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateY(-2px);
-            border-color: rgba(255, 255, 255, 0.3);
+        .bento-item:active {
+            transform: scale(0.98);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        @media (min-width: 768px) {
+            .bento-item:hover {
+                background: rgba(255, 255, 255, 0.12);
+                transform: translateY(-2px);
+                border-color: rgba(255, 255, 255, 0.3);
+            }
         }
 
         .map-container {
-            mask-image: radial-gradient(white, black);
-            border-radius: 24px;
+            border-radius: 20px;
             overflow: hidden;
-            filter: contrast(1.05) brightness(0.9);
+            position: relative;
+            background: #111;
         }
 
         .status-badge {
             display: inline-flex;
             align-items: center;
-            padding: 6px 14px;
+            padding: 5px 12px;
             border-radius: 99px;
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: #fff;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 800;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.1em;
         }
 
         .pulse {
-            width: 6px;
-            height: 6px;
-            background: #fff;
+            width: 5px;
+            height: 5px;
+            background: #4ade80;
             border-radius: 50%;
-            margin-right: 8px;
+            margin-right: 6px;
             animation: pulse-animation 2s infinite;
         }
 
         @keyframes pulse-animation {
-            0% { box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
-            100% { box-shadow: 0 0 0 0px rgba(255, 255, 255, 0); }
+            0% { box-shadow: 0 0 0 0px rgba(74, 222, 128, 0.5); }
+            70% { box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
+            100% { box-shadow: 0 0 0 0px rgba(74, 222, 128, 0); }
+        }
+
+        @media (max-width: 360px) {
+            .modern-card { border-radius: 30px; }
+            .p-10 { padding: 1.5rem !important; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Fondo de página precargado -->
     <div id="page-bg"></div>
 
-    <!-- Pantalla de Bienvenida -->
+    <!-- Pantalla de Bienvenida (Welcome Text Actualizado) -->
     <div id="splash-screen">
         <div id="splash-bg"></div>
         <div class="welcome-content" id="welcome-content">
@@ -222,71 +232,77 @@
     <!-- Contenido Principal -->
     <div id="main-wrapper">
         <div class="modern-card">
-            <div class="p-10 text-center">
-                <div class="mb-8 inline-block logo-container">
-                    <img src="https://i.postimg.cc/bvFypWFw/Sin-titulo-3SA.png" alt="Logo Hacienda Santa Ana" class="max-h-36 w-auto">
+            <div class="p-8 sm:p-10 text-center">
+                <div class="mb-6 inline-block logo-container">
+                    <img src="https://i.postimg.cc/bvFypWFw/Sin-titulo-3SA.png" alt="Logo Hacienda Santa Ana" class="max-h-24 sm:max-h-32 w-auto">
                 </div>
                 
                 <div class="flex justify-center mb-6">
                     <div class="status-badge">
-                        <span class="pulse"></span> OPEN NOW
+                        <span class="pulse"></span> ABIERTO AHORA
                     </div>
                 </div>
 
-                <h2 class="text-[10px] font-black tracking-[0.5em] text-white/60 uppercase mb-3">TODOS SANTOS, BCS.</h2>
-                <p class="text-sm text-white/90 font-medium leading-relaxed px-2">
-                    Premium fashion and accessories curation inspired by the spirit of Baja.
+                <h2 class="text-[9px] sm:text-[10px] font-black tracking-[0.4em] text-white/50 uppercase mb-3">TODOS SANTOS, BCS.</h2>
+                <p class="text-sm sm:text-base text-white/90 font-medium leading-relaxed px-1">
+                    Curated premium fashion and accessories inspired by the spirit of Baja.
                 </p>
             </div>
 
-            <div class="px-6 pb-8 space-y-4">
-                <a href="https://www.instagram.com/haciendasantaana13/" target="_blank" class="bento-item p-6 flex items-center group">
-                    <div class="w-11 h-11 bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] rounded-2xl flex items-center justify-center text-white mr-4 shadow-lg transition-transform group-hover:rotate-6">
+            <div class="px-5 sm:px-6 pb-8 space-y-4">
+                
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/haciendasantaana.bcs/" target="_blank" class="bento-item p-5 flex items-center group">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] rounded-xl sm:rounded-2xl flex items-center justify-center text-white mr-4 shadow-lg">
                         <i class="fa-brands fa-instagram text-xl"></i>
                     </div>
                     <div class="flex-1">
-                        <h4 class="text-sm font-bold text-white tracking-tight">Instagram</h4>
-                        <p class="text-[11px] text-white/50 font-semibold tracking-wide">@haciendasantaana13</p>
+                        <h4 class="text-xs sm:text-sm font-bold text-white tracking-tight">Instagram</h4>
+                        <p class="text-[10px] sm:text-[11px] text-white/40 font-semibold">@haciendasantaana.bcs</p>
                     </div>
-                    <i class="fa-solid fa-chevron-right text-white/20 group-hover:text-white transition-colors"></i>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-white/20"></i>
                 </a>
 
+                <!-- Ubicación (Downtown Actualizado) -->
                 <div class="bento-item p-3">
-                    <div class="map-container h-44 w-full mb-4 bg-stone-900">
+                    <div class="map-container h-40 sm:h-48 w-full mb-4">
                         <iframe 
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3660.8351586526184!2d-110.2235956!3d23.4484081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86af92215c0e0001%3A0x9c0c6f8e6d55cbf8!2sHacienda%20Santa%20Ana!5e0!3m2!1sen!2smx!4v1710890000000!5m2!1sen!2smx" 
-                            class="w-full h-full border-0" 
+                            class="w-full h-full border-0 rounded-xl" 
                             allowfullscreen="" 
                             loading="lazy">
                         </iframe>
                     </div>
-                    <div class="flex items-center justify-between px-2 pb-2">
-                        <div class="flex items-center">
-                            <i class="fa-solid fa-location-dot text-white/40 mr-3 text-xs"></i>
-                            <span class="text-[10px] font-bold text-white/70 uppercase tracking-widest leading-tight">Hacienda Santa Ana,<br>Downtown, Todos Santos</span>
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-3 px-2 pb-2">
+                        <div class="flex items-start sm:items-center w-full sm:w-auto">
+                            <i class="fa-solid fa-location-dot text-white/40 mt-1 sm:mt-0 mr-3 text-xs"></i>
+                            <span class="text-[9px] sm:text-[10px] font-bold text-white/60 uppercase tracking-widest leading-tight">
+                                Hacienda Santa Ana,<br>Downtown, Todos Santos
+                            </span>
                         </div>
-                        <a href="https://www.google.com/maps/place/Hacienda+Santa+Ana/data=!4m2!3m1!1s0x86af92215c0e0001:0x9c0x9c0c6f8e6d55cbf8?sa=X&ved=1t:2428&hl=es-419&ictx=111" target="_blank" class="text-[9px] font-black text-stone-900 bg-white px-4 py-2 rounded-full uppercase tracking-tighter hover:scale-105 transition-all shadow-md">Directions</a>
+                        <a href="https://www.google.com/maps/place/Hacienda+Santa+Ana/data=!4m2!3m1!1s0x86af92215c0e0001:0x9c0x9c0c6f8e6d55cbf8?sa=X&ved=1t:2428&hl=es-419&ictx=111" target="_blank" class="w-full sm:w-auto text-center text-[9px] font-black text-stone-900 bg-white px-5 py-2.5 rounded-full uppercase tracking-widest shadow-xl">
+                            VER MAPA
+                        </a>
                     </div>
                 </div>
 
-                <button onclick="copyToClipboard()" class="w-full py-8 text-[11px] font-black tracking-[0.3em] text-white/40 hover:text-white transition-all flex items-center justify-center group uppercase">
-                    <i class="fa-solid fa-share-nodes mr-3 group-hover:scale-125 transition-transform"></i> 
-                    SHARE DIGITAL CARD
-                </button>
+                <!-- Footer Estático -->
+                <div class="w-full pt-6 pb-4 text-[10px] font-black tracking-[0.5em] text-white/30 flex items-center justify-center uppercase">
+                    BAJA CALIFORNIA SUR
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        const imagesToLoad = [
-            'https://i.postimg.cc/52s1SDJx/Chat-GPT-Image-19-mar-2026-05-48-15-p-m.png',
-            'https://i.postimg.cc/kg268NrL/Chat-GPT-Image-19-mar-2026-05-48-15-p-m.png',
+        const assets = [
+            'https://i.postimg.cc/W13P9SXn/Chat-GPT-Image-19-mar-2026-07-33-25-p-m.png',
             'https://i.postimg.cc/bvFypWFw/Sin-titulo-3SA.png'
         ];
 
         let loadedCount = 0;
 
-        function startApp() {
+        function initExperience() {
             const splash = document.getElementById('splash-screen');
             const wrapper = document.getElementById('main-wrapper');
             const splashBg = document.getElementById('splash-bg');
@@ -298,44 +314,22 @@
             pageBg.classList.add('loaded');
 
             setTimeout(() => {
-                splashBg.style.transform = 'scale(1.08)';
-            }, 100);
-
-            setTimeout(() => {
                 splash.classList.add('zoom-out');
                 setTimeout(() => {
                     wrapper.classList.add('reveal');
-                }, 500);
-            }, 2200);
+                }, 400);
+            }, 2500);
         }
 
-        imagesToLoad.forEach(src => {
+        assets.forEach(src => {
             const img = new Image();
             img.src = src;
             img.onload = () => {
                 loadedCount++;
-                if (loadedCount === imagesToLoad.length) {
-                    startApp();
-                }
+                if (loadedCount === assets.length) initExperience();
             };
-            img.onerror = () => startApp();
+            img.onerror = () => initExperience();
         });
-
-        function copyToClipboard() {
-            const textToCopy = window.location.href;
-            const el = document.createElement('textarea');
-            el.value = textToCopy;
-            document.body.appendChild(el);
-            el.select();
-            try {
-                document.execCommand('copy');
-                const btn = event.currentTarget;
-                const originalContent = btn.innerHTML;
-                btn.innerHTML = '<i class="fa-solid fa-check mr-2"></i> COPIED!';
-                setTimeout(() => btn.innerHTML = originalContent, 2000);
-            } catch (err) { console.error(err); }
-            document.body.removeChild(el);
-        }
     </script>
 </body>
 </html>
